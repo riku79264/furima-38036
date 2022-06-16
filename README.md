@@ -29,7 +29,7 @@
 | status_id        | integer    | null: false                    |
 | postage_id       | integer    | null: false                    |
 | price            | integer    | null: false                    |
-| explain          | string     | null: false                    |
+| explain          | text       | null: false                    |
 | shipping_area_id | integer    | null: false                    |
 | delivery_day_id  | integer    | null: false                    |
 | user             | references | null: false, foreign_key: true |
@@ -45,12 +45,12 @@
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
 | user        | references | null: false, foreign_key: true |
-| address     | references | null: false, foreign_key: true |
+| item        | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :address
+- has_one    :item 
 
 ## addresses table
 
@@ -62,7 +62,8 @@
 | street_number    | string     | null: false                    |
 | building_name    | string     |                                |
 | phone_number     | string     | null: false,                   |
+| purchase_records | references | null: false, foreign_key: true |
 
 ### Association
-
+ has_one  :purchase_records
 
