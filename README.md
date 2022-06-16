@@ -66,5 +66,5 @@
 | purchase_record  | references | null: false, foreign_key: true |
 
 ### Association
- has_one  :purchase_record
+- has_one  :purchase_record
 
