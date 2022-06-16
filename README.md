@@ -51,6 +51,7 @@
 
 - belongs_to :user
 - has_one    :item 
+- has_one    :address
 
 ## addresses table
 
@@ -62,8 +63,8 @@
 | street_number    | string     | null: false                    |
 | building_name    | string     |                                |
 | phone_number     | string     | null: false,                   |
-| purchase_records | references | null: false, foreign_key: true |
+| purchase_record  | references | null: false, foreign_key: true |
 
 ### Association
- has_one  :purchase_records
+ has_one  :purchase_record
 
