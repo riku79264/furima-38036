@@ -4,8 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :password,length:{minimum:6},format:{with: /(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d]{6,}/}
+
   with_options presence: true do
     
+    validates :password_confirmation,length:{minimum:6},format:{with: /(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d]{6,}/}
     validates :name
     # ひらがな、カタカナ、漢字のみ許可する
     with_options format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."} do
@@ -18,6 +21,5 @@ class User < ApplicationRecord
       validates :family_first_name_kana
     end
     validates :birthday
-    # validates :password,:password_confirmation,length:{minimum:6},format:{with: /(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d]{6,}/}
   end
 end
