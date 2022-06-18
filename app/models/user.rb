@@ -4,17 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :password, format:{with: /(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d]/}
-  # validates :password_confirmation, format:{with: /(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d]/}
+  validates :password, format:{with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i}
+  # validates :password_confirmation, format:{with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i}
   with_options presence: true do
     
-    validates :name
-    # ひらがな、カタカナ、漢字のみ許可する
-    with_options format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."} do
+  validates :name
+    # 全角漢字のみ許可する
+    with_options format: {with: /\A[一-龥]+\z/, message: "is invalid. Input full-width characters."} do
       validates :family_name
       validates :first_name
     end
-    # カタカナのみ許可する
+    # 全角カタカナのみ許可する
     with_options format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."} do
       validates :family_name_kana
       validates :family_first_name_kana
