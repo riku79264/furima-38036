@@ -56,28 +56,28 @@ RSpec.describe User, type: :model do
         @user.password = '12345'
         @user.password_confirmation = '12345'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)', "Password is invalid")
+        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)","Password Include both letters and numbers.","Password Cannot be registered with a password that includes double-byte characters.")
       end
       it 'パスワードが英語のみでは登録できない' do
         @user.password = 'abcdef'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
+        expect(@user.errors.full_messages).to include("Password Include both letters and numbers.")
       end
       it 'パスワードが数字のみでは登録できない' do
         @user.password = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password Include both letters and numbers.")
       end
       it '全角文字を含むパスワードでは登録できない' do
         @user.password = 'Ａ０12345'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password","Password Include both letters and numbers.","Password Cannot be registered with a password that includes double-byte characters.")
       end
       it 'passwordとpassword_confirmationが不一致では登録できない' do
         @user.password = '123456'
         @user.password_confirmation = '1234567'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password","Password Include both letters and numbers.","Password Cannot be registered with a password that includes double-byte characters.")
       end
       it '重複したemailが存在する場合は登録できない' do
         @user.save
