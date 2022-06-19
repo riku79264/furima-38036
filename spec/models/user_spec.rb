@@ -71,13 +71,13 @@ RSpec.describe User, type: :model do
       it '全角文字を含むパスワードでは登録できない' do
         @user.password = 'Ａ０12345'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password","Password Include both letters and numbers.","Password Cannot be registered with a password that includes double-byte characters.")
+        expect(@user.errors.full_messages).to include("Password Cannot be registered with a password that includes double-byte characters.")
       end
       it 'passwordとpassword_confirmationが不一致では登録できない' do
         @user.password = '123456'
         @user.password_confirmation = '1234567'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password","Password Include both letters and numbers.","Password Cannot be registered with a password that includes double-byte characters.")
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
       it '重複したemailが存在する場合は登録できない' do
         @user.save
