@@ -16,9 +16,3 @@ class ApplicationController < ActionController::Base
   end
 end
 
-
-# family_name           | string              | null: false               |
-# | first_name            | string              | null: false               |
-# | family_name_kana      | string              | null: false               |
-# | family_first_name_kana| string              | null: false               |
-# | birthday              | date                | null: false               |
