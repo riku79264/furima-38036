@@ -90,13 +90,13 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
       end
-      it 'family_nameが全角漢字でないと登録できない' do
-        @user.family_name = 'やまだ'
+      it 'family_nameが全角（漢字・ひらがな・カタカナ）でないと登録できない' do
+        @user.family_name = 'yamada'
         @user.valid?
         expect(@user.errors.full_messages).to include("Family name is invalid. Input full-width characters.")
       end
-      it 'first_nameが全角漢字でないと登録できない' do
-        @user.first_name = 'たろう'
+      it 'first_nameが全角（漢字・ひらがな・カタカナ）でないと登録できない' do
+        @user.first_name = 'tarou'
         @user.valid?
         expect(@user.errors.full_messages).to include("First name is invalid. Input full-width characters.")
       end

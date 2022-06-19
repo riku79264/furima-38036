@@ -5,12 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :password, format:{with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i}
-  # validates :password_confirmation, format:{with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i}
+  
   with_options presence: true do
-    
-  validates :name
-    # 全角漢字のみ許可する
-    with_options format: {with: /\A[一-龥]+\z/, message: "is invalid. Input full-width characters."} do
+    validates :name
+    # 全角（漢字・ひらがな・カタカナ）のみ許可する
+    with_options format: {with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/, message: "is invalid. Input full-width characters."} do
       validates :family_name
       validates :first_name
     end
