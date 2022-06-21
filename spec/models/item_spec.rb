@@ -34,31 +34,31 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーの情報が必須であること' do
-        @item.category_id = '---'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it '商品の状態についての情報が必須であること' do
-        @item.status_id = '---'
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
 
       it '配送料の負担についての情報が必須であること' do
-        @item.postage_id = '---'
+        @item.postage_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Postage can't be blank")
       end
 
       it '発送元の地域についての情報が必須であること' do
-        @item.shipping_area_id = '---'
+        @item.shipping_area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping area can't be blank")
       end
 
       it '発送までの日数についての情報が必須であること' do
-        @item.delivery_day_id = '---'
+        @item.delivery_day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery day can't be blank")
       end
@@ -70,7 +70,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '販売価格は、¥299以下では保存不可であること' do
-        @item.price = '100'
+        @item.price = '299'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
       end
@@ -93,3 +93,10 @@ RSpec.describe Item, type: :model do
     end
   end
 end
+
+
+    # validates :category_id
+    # validates :status_id
+    # validates :postage_id
+    # validates :shipping_area_id
+    # validates :delivery_day_id
