@@ -1,9 +1,10 @@
 class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user! 
+
   def index
       @item = Item.find(params[:item_id])
       @purchase_address = PurchaseAddress.new
-    if current_user.id == @item.user_id
+    if current_user.id == @item.user_id || @item.purchase_record != nil
        redirect_to root_path
     end
   end
@@ -34,5 +35,4 @@ class PurchaseRecordsController < ApplicationController
         currency: 'jpy'                 # 通貨の種類（日本円）
       )
   end
-
 end
