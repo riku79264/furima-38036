@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :items    
+  has_many :purchase_records   
+  
   validates :password, format:{with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: "Include both letters and numbers."}
   validates :password, format:{with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: "Cannot be registered with a password that includes double-byte characters."}                                                                           
   with_options presence: true do
@@ -19,7 +22,6 @@ class User < ApplicationRecord
       validates :family_first_name_kana
     end
     validates :birthday
-  end
 
-  has_many :items
+  end  
 end
