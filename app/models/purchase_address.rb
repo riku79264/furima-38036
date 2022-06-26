@@ -18,7 +18,7 @@ class PurchaseAddress
   end
   
     validates :phone_number, numericality: { with: /\A[0-9]{11}\z/ , message: "Half-width number" }
-
+   
   def save
     purchase_record = PurchaseRecord.create(item_id: item_id, user_id: user_id)
 
