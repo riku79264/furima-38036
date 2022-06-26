@@ -12,13 +12,14 @@ class PurchaseAddress
     validates :shipping_area_id, numericality: { other_than: 1 ,message: "can't be blank" }
     validates :city_name
     validates :street_number
-    validates :phone_number, format: {with: /\A[0-9]{11}\z/ ,message: "Phone number is too short"}
+    validates :phone_number, format: {with: /\A[0-9]{10,11}\z/, message: "Phone number is too short"}
     validates :item_id
     validates :user_id
   end
-  
-    validates :phone_number, numericality: { with: /\A[0-9]{11}\z/ , message: "Half-width number" }
-   
+   validates :phone_number, format: {with: /\A[0-9]{10,11}\z/, message: "Phone number is too long"}
+   validates :phone_number, numericality: { with: /\A[0-9]{10,11}\z/ , message: "Half-width number" }
+
+
   def save
     purchase_record = PurchaseRecord.create(item_id: item_id, user_id: user_id)
 
