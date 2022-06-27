@@ -2,9 +2,11 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_tweet, only: [:show, :edit, :update]
   before_action :move_to_index, only: [:edit, :update, :destroy]
- 
+  before_action :move_to_edit, only: :edit
+
   def index
     @items = Item.all.order("created_at DESC")
+   
   end 
 
   def new
@@ -21,6 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+
   end
 
   def edit
@@ -28,7 +31,7 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to item_path
+      redirect_to root_path
     else
       render :edit
     end    
@@ -52,6 +55,14 @@ class ItemsController < ApplicationController
       redirect_to action: :index
     end
   end
+
+  def move_to_edit
+    @item = Item.find(params[:id])
+    if @item.user_id == current_user.id && @item.purchase_record != nil
+      redirect_to root_path
+    end
+  end
+  
   def set_tweet
     @item = Item.find(params[:id])
   end
